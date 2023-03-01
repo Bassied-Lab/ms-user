@@ -1,0 +1,63 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create users table
+      author: Seynur Mammadov
+      changes:
+        - createTable:
+            schemaName: public
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    name: pk_users
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                  remarks: First name of user
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  remarks: Last name of user
+              - column:
+                  name: email
+                  type: varchar(255)
+                  remarks: User email address
+              - column:
+                  name: status
+                  type: varchar(255)
+                  remarks: Account status (ACTIVE,INACTIVE,CREATED)
+              - column:
+                  name: role
+                  type: varchar(255)
+                  remarks: User role (USER,ADMIN)
+              - column:
+                  name: salt
+                  type: varchar(255)
+                  remarks: Salt for SRP
+              - column:
+                  name: verifier
+                  type: varchar(255)
+                  remarks: Verifier for SRP
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    name: df_created_at
+                    nullable: false
+                  remarks: When the transaction created
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    name: df_updated_at
+                    nullable: false
+                  remarks: When the record updated
