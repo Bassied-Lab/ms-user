@@ -24,26 +24,39 @@ databaseChangeLog:
               - column:
                   name: last_name
                   type: varchar(255)
+                  constraints:
+                    nullable: false
                   remarks: Last name of user
               - column:
                   name: email
                   type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
                   remarks: User email address
               - column:
                   name: status
                   type: varchar(255)
+                  constraints:
+                    nullable: false
                   remarks: Account status (ACTIVE,INACTIVE,CREATED)
               - column:
                   name: role
                   type: varchar(255)
+                  constraints:
+                    nullable: false
                   remarks: User role (USER,ADMIN)
               - column:
                   name: salt
                   type: varchar(255)
+                  constraints:
+                    nullable: false
                   remarks: Salt for SRP
               - column:
                   name: verifier
                   type: varchar(255)
+                  constraints:
+                    nullable: false
                   remarks: Verifier for SRP
               - column:
                   name: created_at

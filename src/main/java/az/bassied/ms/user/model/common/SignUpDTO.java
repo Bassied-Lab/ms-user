@@ -3,6 +3,8 @@ package az.bassied.ms.user.model.common;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.Setter;
 
 public record SignUpDTO(
         @NotBlank(message = "sign.up.validation.firstName.is.blank")

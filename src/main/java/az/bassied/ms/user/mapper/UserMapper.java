@@ -5,7 +5,9 @@ import az.bassied.ms.user.model.common.SignUpDTO;
 import az.bassied.ms.user.model.common.UserDTO;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
+
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = IGNORE)
 public interface UserMapper {
 
     UserEntity signUpDtoToEntity(SignUpDTO dto);

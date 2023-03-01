@@ -2,6 +2,7 @@ package az.bassied.ms.user.service.impl;
 
 import az.bassied.ms.user.dao.entities.UserEntity;
 import az.bassied.ms.user.dao.repos.UserRepository;
+import az.bassied.ms.user.error.exceptions.UserAlreadyExistException;
 import az.bassied.ms.user.mapper.UserMapper;
 import az.bassied.ms.user.model.common.SignUpDTO;
 import az.bassied.ms.user.model.common.UserDTO;
@@ -24,7 +25,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO create(SignUpDTO request) {
         logger.info("Action.create.start");
-
+        if (repo.findByEmail(request.email()).isPresent()) {
+            throw new UserAlreadyExistException();
+        }
+        logger.info(mapper.signUpDtoToEntity(request).getFirstName());
         UserEntity user = repo.save(mapper.signUpDtoToEntity(request));
         logger.info("Action.create.end");
         return mapper.entityToDTO(user);
