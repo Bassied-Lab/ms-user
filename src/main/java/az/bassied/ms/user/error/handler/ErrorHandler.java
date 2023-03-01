@@ -2,7 +2,7 @@ package az.bassied.ms.user.error.handler;
 
 import az.bassied.ms.user.error.ErrorResponse;
 import az.bassied.ms.user.error.exceptions.GeneralException;
-import az.bassied.ms.user.error.exceptions.UserAlreadyExistException;
+import az.bassied.ms.user.error.exceptions.ValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -50,10 +50,10 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler({UserAlreadyExistException.class})
-    public ErrorResponse handleForbiddenException(GeneralException ex) {
-        logger.error("Action.handleForbiddenException.error forbidden exception: {}", ex.toString());
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ValidationException.class)
+    public ErrorResponse handleValidationException(GeneralException ex) {
+        logger.error("Action.handleValidationException.error validate exception: {}", ex.toString());
         return new ErrorResponse(ex.getCode(), ex.getMessage());
     }
 

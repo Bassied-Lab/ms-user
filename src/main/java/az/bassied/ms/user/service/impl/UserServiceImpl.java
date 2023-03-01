@@ -2,10 +2,11 @@ package az.bassied.ms.user.service.impl;
 
 import az.bassied.ms.user.dao.entities.UserEntity;
 import az.bassied.ms.user.dao.repos.UserRepository;
-import az.bassied.ms.user.error.exceptions.UserAlreadyExistException;
+import az.bassied.ms.user.error.exceptions.ValidationException;
 import az.bassied.ms.user.mapper.UserMapper;
 import az.bassied.ms.user.model.common.SignUpDTO;
 import az.bassied.ms.user.model.common.UserDTO;
+import az.bassied.ms.user.model.consts.Messages;
 import az.bassied.ms.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -26,11 +27,10 @@ public class UserServiceImpl implements UserService {
     public UserDTO create(SignUpDTO request) {
         logger.info("Action.create.start");
         if (repo.findByEmail(request.email()).isPresent()) {
-            throw new UserAlreadyExistException();
+            throw new ValidationException(Messages.USER_EXIST_ERR_CODE, Messages.USER_EXIST_ERR_MSG);
         }
         UserEntity user = repo.save(mapper.signUpDtoToEntity(request));
         logger.info("Action.create.end");
         return mapper.entityToDTO(user);
-
     }
 }
