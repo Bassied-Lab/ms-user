@@ -57,4 +57,13 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         return new ErrorResponse(ex.getCode(), ex.getMessage());
     }
 
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler({RuntimeException.class})
+    public ErrorResponse handleUnexpectedError(RuntimeException ex) {
+        logger.error("Action.handleValidationException.error validate exception: {}", ex.toString());
+        return new ErrorResponse(
+                HttpStatus.INTERNAL_SERVER_ERROR.name(),
+                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+    }
+
 }
