@@ -1,8 +1,9 @@
 package az.bassied.ms.user.controller.internal;
 
-import az.bassied.ms.user.service.UserService;
 import az.bassied.ms.user.model.common.SignUpDTO;
+import az.bassied.ms.user.model.common.UserDTO;
 import az.bassied.ms.user.model.consts.URLs;
+import az.bassied.ms.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,8 +21,7 @@ public class UserController {
     private final UserService service;
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody @Valid SignUpDTO request) {
-        service.create(request);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<UserDTO> create(@RequestBody @Valid SignUpDTO request) {
+        return ResponseEntity.ok(service.create(request));
     }
 }
