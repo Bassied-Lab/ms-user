@@ -28,7 +28,6 @@ public class UserServiceImpl implements UserService {
         if (repo.findByEmail(request.email()).isPresent()) {
             throw new UserAlreadyExistException();
         }
-        logger.info(mapper.signUpDtoToEntity(request).getFirstName());
         UserEntity user = repo.save(mapper.signUpDtoToEntity(request));
         logger.info("Action.create.end");
         return mapper.entityToDTO(user);
