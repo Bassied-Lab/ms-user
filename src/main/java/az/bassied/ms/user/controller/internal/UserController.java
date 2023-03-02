@@ -7,12 +7,7 @@ import az.bassied.ms.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,4 +25,11 @@ public class UserController {
     public ResponseEntity<UserDTO> activate(@RequestParam String email) {
         return ResponseEntity.ok(service.activate(email));
     }
+
+    @PatchMapping(URLs.GET_BY_EMAIL)
+    public ResponseEntity<UserDTO> getByEmail(@RequestParam String email) {
+        return ResponseEntity.ok(service.getByEmail(email));
+    }
+    //todo change password flow
+
 }

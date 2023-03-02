@@ -2,6 +2,7 @@ package az.bassied.ms.user.error.handler;
 
 import az.bassied.ms.user.error.ErrorResponse;
 import az.bassied.ms.user.error.exceptions.GeneralException;
+import az.bassied.ms.user.error.exceptions.NotFoundException;
 import az.bassied.ms.user.error.exceptions.ValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,6 +65,13 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         return new ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.name(),
                 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ErrorResponse handleNotFoundException(NotFoundException ex) {
+        logger.error("Action.handleNotFoundException.error not found exception: {}", ex.toString());
+        return new ErrorResponse(ex.getCode(), ex.getMessage());
     }
 
 }

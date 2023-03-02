@@ -46,4 +46,13 @@ public class UserServiceImpl implements UserService {
         logger.info("Action.activate.end");
         return mapper.entityToDTO(user);
     }
+
+    @Override
+    public UserDTO getByEmail(String email) {
+        logger.info("Action.getByEmail.start");
+        UserEntity user = repo.findByEmail(email.toLowerCase())
+                .orElseThrow(() -> new NotFoundException(Messages.USER_NOT_FOUND, Messages.USER_NOT_FOUND_MSG));
+        logger.info("Action.getByEmail.end");
+        return mapper.entityToDTO(user);
+    }
 }

@@ -11,5 +11,6 @@ public final class URLs {
 
     //User Controller
     public static final String ACTIVATE_USER = ROOT + "/activate";
+    public static final String GET_BY_EMAIL = ROOT + "/email";
 
 }
