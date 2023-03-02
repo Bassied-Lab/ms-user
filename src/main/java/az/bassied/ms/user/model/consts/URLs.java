@@ -9,4 +9,7 @@ public final class URLs {
     public static final String ROOT = "/v1/ms-user";
     public static final String ROOT_INTERNAL = "/v1/internal/ms-user";
 
+    //User Controller
+    public static final String ACTIVATE_USER = ROOT + "/activate";
+
 }
