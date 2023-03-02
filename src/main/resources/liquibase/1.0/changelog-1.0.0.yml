@@ -74,3 +74,8 @@ databaseChangeLog:
                     name: df_updated_at
                     nullable: false
                   remarks: When the record updated
+        - update:
+            schemaName: public
+            tableName: users
+            columnName: email
+            selectExpression: ${email:toLowerCase()}
