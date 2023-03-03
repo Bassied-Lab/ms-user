@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: ms-user
+  datasource:
+    url: jdbc:postgresql://localhost:5432/users
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:liquibase/changelog-master.yml
+
+logging:
+  level:
+    root: INFO
+    az.bassied: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
+server:
+  port: 9090
+
